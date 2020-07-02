@@ -3,14 +3,13 @@ var shoppingCart = function () {
   // updateSubtotal function - updates the subtotal for each item by multiplying unit price by quantity
   var updateSubtotal = function (el) {
     var unitPrice = Number($(el).find(".unitPrice").text());
-    console.log(unitPrice);
-
     var quantity = Number($(el).find(".quantity input").val());
-    // Calculate subtotal
+
+    // Calculate subtotal and format to two decimal places
     var subTotal = quantity * unitPrice;
-    console.log(subTotal);
     $(el).children().children(".subtotal").html(subTotal.toFixed(2));
     $(el).children().children(".unitPrice").html(unitPrice.toFixed(2));
+
     return subTotal;
   };
 
@@ -31,6 +30,7 @@ var shoppingCart = function () {
     // Calculate the overall total using reduce and the sum function to add together all subtotals
     var total = itemSubtotals.reduce(sum);
 
+    // Format the overall total as currency and display 
     $(".totalPrice").html("$" + total.toFixed(2));
   };
 

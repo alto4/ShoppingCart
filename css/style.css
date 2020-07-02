@@ -16,17 +16,37 @@ tr.row {
   border-top: 1px dotted;
 }
 
+#addItem {
+  border-top: 2px solid #000;
+}
 
 td {
   border-top: none !important;
 }
 
+/* Responsive Styles */
+@media (max-width: 950px) {
+
+  .container {
+    max-width: 90%;
+  }
+
+  .quantity input {
+    width: 75px !important;
+  }
+
+  button {
+    padding: .5em;
+  }
+}
+
+/* Mobile Styles */
 @media (max-width: 767px) {
 
   form .col-12 input,
   form .col-12 button {
     display: block;
-    min-width: 90%;
+    min-width: 100%;
     height: 34px;
     font-size: 20px;
     line-height: 20px;
@@ -41,20 +61,4 @@ td {
   .input {
     width: 10px !important
   }
-}
-
-@media (max-width: 950px) {
-
-  .container {
-    max-width: 100%;
-  }
-
-  .quantity input {
-    width: 75px !important;
-  }
-
-  button {
-    padding: .5em;
-  }
-
 }
