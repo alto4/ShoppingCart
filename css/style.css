@@ -3,14 +3,58 @@ body {
 }
 
 .container {
-  max-width: 950px;
+  max-width: 900px;
   margin: auto;
 }
 
 input {
   width: 150px !important;
+  padding: 0 .3em
 }
+
+tr.row {
+  border-top: 1px dotted;
+}
+
 
 td {
   border-top: none !important;
+}
+
+@media (max-width: 767px) {
+
+  form .col-12 input,
+  form .col-12 button {
+    display: block;
+    min-width: 90%;
+    height: 34px;
+    font-size: 20px;
+    line-height: 20px;
+    margin: .5rem auto;
+    padding: 5px;
+  }
+
+  form .col-12 button {
+    height: 40px;
+  }
+
+  .input {
+    width: 10px !important
+  }
+}
+
+@media (max-width: 950px) {
+
+  .container {
+    max-width: 100%;
+  }
+
+  .quantity input {
+    width: 75px !important;
+  }
+
+  button {
+    padding: .5em;
+  }
+
 }

@@ -6,14 +6,11 @@ var shoppingCart = function () {
     console.log(unitPrice);
 
     var quantity = Number($(el).find(".quantity input").val());
-    console.log(quantity);
     // Calculate subtotal
     var subTotal = quantity * unitPrice;
     console.log(subTotal);
-    $(el)
-      .children(".subtotal")
-      .html("$" + subTotal + ".00");
-
+    $(el).children().children(".subtotal").html(subTotal.toFixed(2));
+    $(el).children().children(".unitPrice").html(unitPrice.toFixed(2));
     return subTotal;
   };
 
@@ -33,7 +30,8 @@ var shoppingCart = function () {
 
     // Calculate the overall total using reduce and the sum function to add together all subtotals
     var total = itemSubtotals.reduce(sum);
-    $(".totalPrice").html("$" + total + ".00");
+
+    $(".totalPrice").html("$" + total.toFixed(2));
   };
 
   // EVENT LISTENERS
@@ -55,21 +53,20 @@ var shoppingCart = function () {
       e.preventDefault();
       var item = $(this).find("[name=item]").val();
       var itemUnitPrice = $(this).find("[name=unitPrice]").val();
-
       // Create new row with stored values
       var newRow =
-        '<tr class="row">' +
-        '<td class="item col-4">' +
+        '<tr class="row pl-3 py-2">' +
+        '<td class="item col-7 col-md-4">' +
         item +
         "</td>" +
-        '<td class="unitPrice col-3">' +
+        '<td class="col-3 text-right text-md-center">$<span class="unitPrice">' +
         itemUnitPrice +
-        "</td>" +
-        '<td class="quantity col-4"><span class="font-weight-bold">QTY </span>' +
-        '<input type="text" value="1" />' +
+        "</span></td>" +
+        '<td class="quantity col-7 col-md-4 d-flex align-items-center"><span class="font-weight-bold">QTY </span>' +
+        '<input type="number" value="1" class="mx-2" />' +
         '<button class="btn btn-sm btn-danger btn-remove">Cancel</button>' +
         "</td>" +
-        '<td class="subtotal col-1">Subtotal</td>';
+        '<td class="col-3 font-weight-bold col-md-1 text-right">$<span class="subtotal"></span></td>';
 
       // Append the row to items table
       $("tbody").append(newRow);

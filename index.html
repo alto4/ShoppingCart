@@ -19,29 +19,37 @@
 
 <body>
   <div class="container">
-    <h1 class="my-4">Shopping Cart</h1>
+    <h1 class="my-4 font-weight-bold text-center text-sm-left">Shopping Cart</h1>
     <div class="row">
       <div class="col-12">
         <table class="table w-100">
-          <tr class="row">
-            <td class="item col-4">Bananas</td>
-            <td class="unitPrice col-3">2.00</td>
-            <td class="quantity col-4">
+          <thead>
+            <tr class="row pl-3 py-0 d-none d-md-flex">
+              <th class=" col-7 col-md-4">Item</th>
+              <th class="col-3 text-right text-md-center">Unit Price</th>
+              <th class="col-7 col-md-4 text-center">Quantity</th>
+              <th class="col-3 col-md-1 text-right">Subtotal</th>
+            </tr>
+          </thead>
+          <tr class="row pl-3 py-2">
+            <td class="item col-7 col-md-4">Bananas</td>
+            <td class="col-3 text-right text-md-center">$<span class="unitPrice">2.00</span></td>
+            <td class="quantity col-7 col-md-4 d-flex align-items-center">
               <span class="font-weight-bold">QTY</span>
-              <input type="text" value="1" />
+              <input type="number" value="1" class="mx-2" />
               <button class="btn btn-sm btn-danger btn-remove">Cancel</button>
             </td>
-            <td class="subtotal col-1">Subtotal</td>
+            <td class="col-3 font-weight-bold col-md-1 text-right">$<span class="subtotal"></span></td>
           </tr>
-          <tr class="row">
-            <td class="item col-4">Pork Chops</td>
-            <td class="unitPrice col-3">2.25</td>
-            <td class="quantity col-4">
+          <tr class="row pl-3 py-2">
+            <td class="item col-7 col-md-4">Pork Chops</td>
+            <td class="col-3 text-right text-md-center">$<span class="unitPrice">2.25</span></td>
+            <td class="quantity col-7 col-md-4 d-flex align-items-center ">
               <span class="font-weight-bold">QTY</span>
-              <input type="text" value="4" />
+              <input type="number" value="4" class="mx-2" />
               <button class="btn btn-sm btn-danger btn-remove">Cancel</button>
             </td>
-            <td class="subtotal col-1">Subtotal</td>
+            <td class="col-3 font-weight-bold col-md-1 text-right">$<span class="subtotal"></span></td>
           </tr>
         </table>
       </div>
@@ -49,28 +57,28 @@
       <!-- Input Form -->
       <form class="col-12 py-auto" id="addItem">
         <div class="row">
-          <div class="col-4">
-            <input name="item" type="text" placeholder="Item" />
+          <div class="col-12 col-md-4">
+            <input name="item" type="text" placeholder="Item" required />
           </div>
-          <div class="col-3">
-            <input name="unitPrice" type="text" placeholder="Unit Price" />
+          <div class="col-12 col-md-3">
+            <input name="unitPrice" type="number" placeholder="Unit Price" required />
           </div>
-          <div class="col-2">
-            <button class="btn btn-sm btn-dark">Create</button>
+          <div class="col-12 col-md-2 ">
+            <button class="btn btn-dark">Create</button>
           </div>
-          <div class="col-3">
-            <button type="submit" class="btn btn-success btn-calculate btn-lg">
+          <div class="col-12 col-md-3">
+            <button type="submit" class="btn w-sm-100 btn-success btn-calculate btn-lg">
               Calculate
             </button>
           </div>
         </div>
       </form>
     </div>
-    <div class="col-12 col-md-6">
-      <h1>
-        Total Price: <br />
+    <div class="col-12 col-md-6 text-center text-md-left p-4">
+      <h2 class="font-weight-bold">
+        Total Price:
         <span class="totalPrice">0.00</span>
-      </h1>
+      </h2>
     </div>
   </div>
 </body>
