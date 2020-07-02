@@ -1,55 +1,91 @@
+// Dynamic Shopping Cart Form
+var shoppingCart = function () {
+  // updateSubtotal function - updates the subtotal for each item by multiplying unit price by quantity
   var updateSubtotal = function (el) {
-    var quantity = Number($(el).find('.quantity input').val());
-    var unitPrice = Number($(el).children('.unitPrice').text());
+    var unitPrice = Number($(el).find(".unitPrice").text());
+    console.log(unitPrice);
+
+    var quantity = Number($(el).find(".quantity input").val());
+    console.log(quantity);
     // Calculate subtotal
     var subTotal = quantity * unitPrice;
-    subTotal = subTotal;
-    $(el).children('.subtotal').html('$' + subTotal + '.00');
+    console.log(subTotal);
+    $(el)
+      .children(".subtotal")
+      .html("$" + subTotal + ".00");
 
     return subTotal;
-  }
+  };
 
-  // 2. Calculate and display the total price.
+  // updateTotals Function - calculates and displays the total order price by adding up all item subtotals
   var updateTotals = function () {
+    var itemSubtotals = [];
+
+    // sum Function - accumlator function for looping through all subtotals
     var sum = function (accumulator, currentValue) {
       return accumulator + currentValue;
     };
-    var itemSubtotals = [];
-    // 1. Loop through each item in cart and calculate subtotal for each item
-    $('tbody tr').each(function (i, el) {
+    // Calculate the subtotal for each item and push it to an array
+    $("tbody tr").each(function (i, el) {
       var subtotal = updateSubtotal(el);
       itemSubtotals.push(subtotal);
-      console.log(itemSubtotals)
     });
 
+    // Calculate the overall total using reduce and the sum function to add together all subtotals
     var total = itemSubtotals.reduce(sum);
-    $('.totalPrice').html('$' + total + '.00');
-  }
+    $(".totalPrice").html("$" + total + ".00");
+  };
 
-  // 5. Use Git to manage version control and push your work to a GitHub repository.
+  // EVENT LISTENERS
 
-  // Once all DOM elements are ready, add functionality 
+  // DOM Loaded Event - once DOM is loaded, add functionality to elements
   $(document).ready(function () {
+    // Update all subtotals and order total based on existing rows
     updateTotals();
 
-    // Update item subtotal and overall total when calculate button is clicked
-    $('.btn-calculate').on('click', function (e) {
+    // Calculate Button Event - update item subtotals and overall total when calculate button is clicked
+    $(".btn-calculate").on("click", function (e) {
       e.preventDefault();
       updateTotals();
     });
 
-    ////////////////////RESUME BELOW WITH ADD NEW ITEM
-    // Add item
-    $('#addItem').on('submit', function (e) {
-      console.log('submitted new item');
+    // Add Item Event - when the add item button is clicked, retrieve input values and create a new item row
+    $("#addItem").on("submit", function (e) {
+      // Get input values from DOM
       e.preventDefault();
-      var item = $(this).find('[name=item]').val();
-      console.log(item);
-    })
+      var item = $(this).find("[name=item]").val();
+      var itemUnitPrice = $(this).find("[name=unitPrice]").val();
 
-    // Allow user to delete an item.
-    $('.btn-remove').on('click', function () {
-      $(this).closest('tr').remove();
+      // Create new row with stored values
+      var newRow =
+        '<tr class="row">' +
+        '<td class="item col-4">' +
+        item +
+        "</td>" +
+        '<td class="unitPrice col-3">' +
+        itemUnitPrice +
+        "</td>" +
+        '<td class="quantity col-4"><span class="font-weight-bold">QTY </span>' +
+        '<input type="text" value="1" />' +
+        '<button class="btn btn-sm btn-danger btn-remove">Cancel</button>' +
+        "</td>" +
+        '<td class="subtotal col-1">Subtotal</td>';
+
+      // Append the row to items table
+      $("tbody").append(newRow);
+
+      // Update subtotal and total when new item is added and clear all input fields
+      updateTotals();
+      $("#addItem").find("[name=item]").val("");
+      $("#addItem").find("[name=unitPrice]").val("");
+    });
+
+    // Remove Item Event - allow user to delete an item when the remove button is clicked
+    $(document).on("click", ".btn-remove", function () {
+      $(this).closest("tr").remove();
       updateTotals();
     });
   });
+};
+
+shoppingCart();
