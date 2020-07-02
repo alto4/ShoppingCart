@@ -1,0 +1,16 @@
+body {
+  background-color: #eee;
+}
+
+.container {
+  max-width: 950px;
+  margin: auto;
+}
+
+input {
+  width: 180px !important;
+}
+
+td {
+  border-top: none !important;
+}
